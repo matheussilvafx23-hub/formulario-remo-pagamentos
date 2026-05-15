@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REMO PAGAMENTOS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- =========================
+         BACKGROUND
+    ========================== -->
+    <div class="background">
+        <!-- giant typography -->
+        <div class="hero-title">
+            <span>REMO</span>
+            <span>PAGAMENTOS</span>
+        </div>
+        <!-- liquid waves -->
+        <div class="liquid-layer">
+            <svg viewBox="0 0 1440 900" preserveAspectRatio="none">
+                <!-- Path único que texto E faixa usam -->
+                <defs>
+                    <path
+                        id="wavePath"
+                        d="M-200,420 Q100,320 400,420 T1000,420 Q1300,320 1600,420 T2200,420"
+                    />
+                    
+                    <!-- Faixa azul criada OFFSET do path -->
+                    <clipPath id="waveClip">
+                        <rect x="-200" y="350" width="2400" height="140"/>
+                    </clipPath>
+                </defs>
+                
+                <!-- Faixa azul usando stroke grosso no MESMO path -->
+                <path
+                    d="M-200,420 Q100,320 400,420 T1000,420 Q1300,320 1600,420 T2200,420"
+                    fill="none"
+                    stroke="var(--blue)"
+                    stroke-width="140"
+                    opacity="1"
+                />
+            </svg>
+            
+            <!-- Texto branco seguindo a MESMA curva -->
+            <svg class="text-path-svg" viewBox="0 0 1440 900">
+                <text class="river-text">
+                    <textPath href="#wavePath" startOffset="0%">
+                        remando juntos • remando juntos • remando juntos • remando juntos •
+                    </textPath>
+                </text>
+            </svg>
+        </div>
+    </div>
+
+    <!-- =========================
+         CONTENT
+    ========================== -->
+    <main class="page-content">
+        <section class="form-shell">
+            <!-- Logo -->
+            <img src="assets/logo-remo.png" alt="Remo" class="logo">
+            
+            <!-- Step Indicator -->
+            <div class="step-indicator">
+                <span class="step-num" id="stepNum">01</span> / 02
+            </div>
+
+            <!-- STEP 1 -->
+            <div class="step step-1 active" id="step1">
+                <h1 class="form-title">
+                    Solicitação de<br>Pagamento
+                </h1>
+                
+                <p class="form-subtitle">
+                    Siga as instruções enviadas pelo financeiro no e-mail de formalização da campanha. 
+                    Preencha com atenção — qualquer irregularidade poderá acarretar atraso no pagamento.
+                </p>
+
+                <div class="input-group">
+                    <label>Código da Campanha</label>
+                    <input type="text" id="codigoCampanha" placeholder="mesmo da formalização">
+                </div>
+
+                <div class="input-group">
+                    <label>@Creator</label>
+                    <input type="text" id="creator" placeholder="username">
+                </div>
+
+                <div class="input-group">
+                    <label>Quantidade de Nota Fiscal</label>
+                    <div class="radio-group">
+                        <label class="radio-option active">
+                            <input type="radio" name="quantidadeNF" value="1 Nota Fiscal" checked>
+                            <span>1 Nota Fiscal</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="quantidadeNF" value="2 Notas Fiscais">
+                            <span>2 Notas Fiscais</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button class="button" onclick="nextStep()">Continuar →</button>
+            </div>
+
+            <!-- STEP 2 -->
+            <div class="step step-2" id="step2">
+                <button class="back-button" onclick="prevStep()">← Voltar</button>
+
+                <h1 class="form-title">
+                    Detalhes da<br>Nota Fiscal
+                </h1>
+
+                <!-- Important Notice -->
+                <div class="info-box">
+                    <h3>⚠ Pontos Importantes</h3>
+                    <p>• Pagamento após assinatura do contrato</p>
+                    <p>• Conta bancária deve pertencer ao CNPJ emissor</p>
+                    <p>• Apenas chaves PIX: CNPJ, e-mail ou telefone</p>
+                </div>
+
+                <!-- Info Grid -->
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h4>Dados para Emissão</h4>
+                        <p><strong>Razão Social:</strong> REMO MARKETING LTDA</p>
+                        <p><strong>CNPJ:</strong> 58.649.778/0001-06</p>
+                        <p><strong>Endereço:</strong> Rua Gregório da Fonseca, nº 574, Nonoai, Porto Alegre - RS, CEP 90830-260</p>
+                    </div>
+
+                    <div class="info-card">
+                        <h4>Descrição Obrigatória da NF</h4>
+                        <pre id="descricaoNF" class="code-block"></pre>
+                    </div>
+                </div>
+
+                <!-- NF 1 -->
+                <div class="nf-section" id="nf1Section">
+                    <h2 class="section-title">Nota Fiscal 1</h2>
+
+                    <div class="input-group">
+                        <label>Banco</label>
+                        <input type="text" id="banco1" placeholder="Ex: Banco Inter">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Titular</label>
+                        <input type="text" id="titular1" placeholder="Nome completo">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Chave PIX</label>
+                        <input type="text" id="chavePix1" placeholder="CNPJ, e-mail ou telefone">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Upload da Nota Fiscal</label>
+                        <div class="upload-area" id="upload1">
+                            <input type="file" id="arquivo1" accept=".pdf" hidden>
+                            <div class="upload-empty">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1200FF" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+                                </svg>
+                                <p>Arraste ou clique para fazer upload</p>
+                                <span>PDF até 10 MB</span>
+                            </div>
+                            <div class="upload-filled" style="display:none;">
+                                <span class="file-name"></span>
+                                <button type="button" class="btn-remove" onclick="removeFile(1)">×</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NF 2 -->
+                <div class="nf-section" id="nf2Section" style="display:none;">
+                    <h2 class="section-title">Nota Fiscal 2</h2>
+
+                    <div class="input-group">
+                        <label>Banco</label>
+                        <input type="text" id="banco2" placeholder="Ex: Banco Inter">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Titular</label>
+                        <input type="text" id="titular2" placeholder="Nome completo">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Chave PIX</label>
+                        <input type="text" id="chavePix2" placeholder="CNPJ, e-mail ou telefone">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Upload da Nota Fiscal</label>
+                        <div class="upload-area" id="upload2">
+                            <input type="file" id="arquivo2" accept=".pdf" hidden>
+                            <div class="upload-empty">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1200FF" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+                                </svg>
+                                <p>Arraste ou clique para fazer upload</p>
+                                <span>PDF até 10 MB</span>
+                            </div>
+                            <div class="upload-filled" style="display:none;">
+                                <span class="file-name"></span>
+                                <button type="button" class="btn-remove" onclick="removeFile(2)">×</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="button" onclick="submitForm()" id="submitBtn">
+                    <span class="btn-text">Finalizar Solicitação</span>
+                    <span class="btn-loader" style="display:none;">Enviando...</span>
+                </button>
+            </div>
+
+            <!-- SUCCESS -->
+            <div class="step step-success" id="successMessage" style="display:none;">
+                <div class="success-content">
+                    <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#1200FF" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M9 12l2 2 4-4"/>
+                    </svg>
+                    <h1 class="form-title">Solicitação Enviada!</h1>
+                    <p class="form-subtitle">
+                        Sua solicitação de pagamento foi recebida e será processada em breve. 
+                        Você receberá uma confirmação por e-mail.
+                    </p>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

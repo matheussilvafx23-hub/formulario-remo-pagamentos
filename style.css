@@ -1,0 +1,594 @@
+/* ==========================================
+   REMO PAYMENTS
+========================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #F3F3F3;
+    --blue: #1200FF;
+    --blue-soft: #2563EB;
+    --blue-light: #7DA2FF;
+    --text: #050505;
+    --muted: #6A6A6A;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* ==========================================
+   BACKGROUND
+========================================== */
+
+.background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    z-index: -1;
+}
+
+/* ==========================================
+   GRAIN
+========================================== */
+
+.background::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(0,0,0,.03) 1px, transparent 1px);
+    background-size: 4px 4px;
+    opacity: 0.22;
+    pointer-events: none;
+}
+
+/* ==========================================
+   GIANT TYPOGRAPHY
+========================================== */
+
+.hero-title {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 5vw;
+    pointer-events: none;
+    user-select: none;
+}
+
+.hero-title span {
+    font-size: 16vw;
+    font-weight: 900;
+    line-height: 0.82;
+    letter-spacing: -14px;
+    color: #FFFFFF;  /* ← BRANCO */
+    opacity: 0.08;   /* ← BEM SUTIL */
+}
+
+/* ==========================================
+   LIQUID LAYER
+========================================== */
+
+.liquid-layer {
+    position: absolute;
+    inset: 0;
+}
+
+/* ==========================================
+   SVG WAVE - STROKE COMO FAIXA
+========================================== */
+
+.liquid-layer svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* ==========================================
+   TEXT PATH - TEXTO BRANCO NA FAIXA
+========================================== */
+
+.text-path-svg {
+    position: absolute;
+    inset: 0;
+}
+
+.river-text {
+    fill: #FFFFFF;
+    opacity: 1;
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: 16px;
+    text-transform: lowercase;
+    animation: textMove 24s linear infinite;
+}
+
+@keyframes textMove {
+    from {
+        transform: translateX(0px);
+    }
+    to {
+        transform: translateX(-220px);
+    }
+}
+
+/* ==========================================
+   PAGE CONTENT
+========================================== */
+
+.page-content {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ==========================================
+   FORM SHELL - ESTILO TALLY COM FUNDO OPACO
+========================================== */
+
+.form-shell {
+    width: 100%;
+    max-width: 720px;
+    padding: 52px;
+    position: relative;
+    
+    /* Fundo opaco para não deixar texto passar por cima */
+    background: #FFFFFF;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+}
+
+/* ==========================================
+   INTERNAL GLOW - REMOVIDO
+========================================== */
+
+/* Removido */
+
+/* ==========================================
+   LOGO
+========================================== */
+
+.logo {
+    width: 92px;
+    margin-bottom: 34px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ==========================================
+   STEP INDICATOR
+========================================== */
+
+.step-indicator {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 32px;
+    position: relative;
+    z-index: 1;
+}
+
+.step-num {
+    color: var(--blue);
+    font-weight: 700;
+    font-size: 16px;
+}
+
+/* ==========================================
+   STEPS
+========================================== */
+
+.step {
+    display: none;
+    position: relative;
+    z-index: 1;
+}
+
+.step.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================
+   TITLE - ESTILO TALLY
+========================================== */
+
+h1,
+.form-title {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+}
+
+.section-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    margin-top: 32px;
+}
+
+/* ==========================================
+   SUBTITLE - ESTILO TALLY
+========================================== */
+
+.subtitle,
+.form-subtitle {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #6B7280;
+    max-width: 600px;
+    margin-bottom: 32px;
+}
+
+/* ==========================================
+   INPUT GROUP
+========================================== */
+
+.input-group {
+    margin-bottom: 24px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+}
+
+/* ==========================================
+   INPUTS - ESTILO TALLY
+========================================== */
+
+input[type="text"],
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 8px;
+    
+    /* Estilo Tally */
+    background: #FFFFFF;
+    border: 1px solid #D1D5DB;
+    
+    font-size: 16px;
+    color: var(--text);
+    outline: none;
+    transition: 0.2s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+input::placeholder {
+    color: #9CA3AF;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #1200FF;
+    box-shadow: 0 0 0 3px rgba(18, 0, 255, 0.1);
+}
+
+/* ==========================================
+   RADIO GROUP - ESTILO TALLY
+========================================== */
+
+.radio-group {
+    display: flex;
+    gap: 12px;
+}
+
+.radio-option {
+    flex: 1;
+    cursor: pointer;
+}
+
+.radio-option input {
+    display: none;
+}
+
+.radio-option span {
+    display: block;
+    padding: 14px 20px;
+    border-radius: 8px;
+    
+    /* Estilo Tally */
+    background: #FFFFFF;
+    border: 2px solid #D1D5DB;
+    
+    text-align: center;
+    font-weight: 500;
+    font-size: 15px;
+    transition: 0.2s ease;
+}
+
+.radio-option:hover span {
+    border-color: #9CA3AF;
+}
+
+.radio-option.active span {
+    background: var(--blue);
+    color: white;
+    border-color: var(--blue);
+}
+
+/* ==========================================
+   BUTTON - ESTILO TALLY
+========================================== */
+
+.button {
+    margin-top: 12px;
+    border: none;
+    background: var(--blue);
+    color: #fff;
+    padding: 14px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+}
+
+.button:hover {
+    background: #0D00CC;
+    transform: translateY(-1px);
+}
+
+.button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ==========================================
+   BACK BUTTON
+========================================== */
+
+.back-button {
+    border: none;
+    background: none;
+    color: var(--blue);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 28px;
+    padding: 8px 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.back-button:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================
+   INFO BOX - ESTILO TALLY
+========================================== */
+
+.info-box {
+    padding: 20px;
+    border-radius: 8px;
+    background: #FEF3C7;
+    border: 1px solid #FCD34D;
+    margin-bottom: 28px;
+}
+
+.info-box h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.info-box p {
+    color: #78350F;
+    line-height: 1.6;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+/* ==========================================
+   INFO GRID
+========================================== */
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.info-card {
+    background: #F9FAFB;
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.info-card h4 {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+}
+
+.info-card p {
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 8px;
+}
+
+.info-card strong {
+    font-weight: 600;
+}
+
+.code-block {
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.8;
+    white-space: pre-line;
+    color: #333;
+}
+
+/* ==========================================
+   NF SECTION
+========================================== */
+
+.nf-section {
+    margin-bottom: 32px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(18, 0, 255, 0.08);
+}
+
+/* ==========================================
+   FILE UPLOAD - ESTILO TALLY
+========================================== */
+
+.upload-area {
+    padding: 32px 24px;
+    border-radius: 8px;
+    text-align: center;
+    background: #FFFFFF;
+    border: 2px dashed #D1D5DB;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.upload-area:hover {
+    border-color: #1200FF;
+    background: #F9FAFB;
+}
+
+.upload-empty svg {
+    margin-bottom: 16px;
+}
+
+.upload-empty p {
+    color: #666;
+    margin-top: 12px;
+    font-weight: 500;
+}
+
+.upload-empty span {
+    color: #999;
+    font-size: 13px;
+    display: block;
+    margin-top: 4px;
+}
+
+.upload-filled {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    background: rgba(18, 0, 255, 0.05);
+    border-radius: 12px;
+}
+
+.file-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.btn-remove {
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: transparent;
+    color: #999;
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.btn-remove:hover {
+    color: #FF0000;
+}
+
+/* ==========================================
+   SUCCESS
+========================================== */
+
+.success-content {
+    text-align: center;
+    padding: 40px 0;
+}
+
+.success-content svg {
+    margin-bottom: 24px;
+    animation: scaleIn 0.5s ease;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 768px) {
+    .form-shell {
+        padding: 34px 24px;
+    }
+
+    h1,
+    .form-title {
+        font-size: 48px;
+    }
+
+    .hero-title span {
+        font-size: 24vw;
+        letter-spacing: -8px;
+    }
+
+    .river-text {
+        font-size: 16px;
+    }
+
+    .radio-group {
+        flex-direction: column;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+}
